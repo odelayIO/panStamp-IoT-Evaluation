@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Panstamp-iot-evaluation : ">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Panstamp-iot-evaluation</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/odelayIO/panStamp-IoT-Evaluation">View on GitHub</a>
+
+          <h1 id="project_title">Panstamp-iot-evaluation</h1>
+          <h2 id="project_tagline"></h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/odelayIO/panStamp-IoT-Evaluation/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/odelayIO/panStamp-IoT-Evaluation/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="panstamp-iot-evaluation" class="anchor" href="#panstamp-iot-evaluation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>panStamp IoT Evaluation</h1>
+
+<p><br>
+<br></p>
+
+<h5>
+<a id="view-on-gh-page" class="anchor" href="#view-on-gh-page" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>View on <a href="http://odelayio.github.io/panStamp-IoT-Evaluation">gh-page</a>
+</h5>
+
+<hr>
+
+<p><br>
+<br>
+<img src="http://odelayio.github.io/panStamp-IoT-Evaluation/images/modules.jpg" alt="modules"></p>
+
+<p><br>
+<br></p>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>This is the evaluation of the <a href="http://www.panstamp.com/news/panstamp-nrg-1-1-special-edition/">panstamp low-power wireless modules</a>.  The panstamp modules are based on the <a href="http://www.ti.com/product/CC430F5137">CC430F5137</a> chipset.  The chipset is a very neat device; Ti combined the very popular MSP430 microcontroller with the CC110L wireless chip.  The device package is very low-power (1.0uA in sleep mode), and has a foot-print of 7.75mm x 7.75mm.  The device only requires a low-pass filter along with some bypass components.  </p>
+
+<p>The panstamp modules are configured using the Arduino IDE.  More information can be found here.</p>
+
+<h2>
+<a id="evaluation-setup" class="anchor" href="#evaluation-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Evaluation Setup</h2>
+
+<p>The evaluation setup is comprised of two panstamp modules:</p>
+
+<ol>
+<li> A module configured in transmit beacon mode.  Module transmits a packet periodically</li>
+<li> A module configured in receive only mode and transfers the received packet to a host computer using an FTDI USB Serial Module <a href="http://www.ftdichip.com/Support/Documents/DataSheets/Modules/DS_UB232R.pdf">UB232R</a>
+</li>
+</ol>
+
+<p>The RF radio has been configured to maximize distance by decreasing the data rate. In addition, the transmitter output power is configured to the highest level (12dBm).  Summary of RF Radio settings:</p>
+
+<ol>
+<li>Tx Output Power 12dBm</li>
+<li>Data Rate (bandwidth) 4800 bps</li>
+</ol>
+
+<p>Please note, I used the UB232R to source power to the panstamp module for this evaluation.  Therefore, the modules are not configured to operate in low-power mode.  </p>
+
+<h2>
+<a id="softwarefirmware" class="anchor" href="#softwarefirmware" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Software/Firmware</h2>
+
+<p>The test was originally developed using Python to post-process the received packets on the USB serial port.  I’ve recently purchased a home version of <a href="https://www.labviewmakerhub.com/">LabVIEW through MakerHub</a>, so I ported the packet processing software to a user friendly GUI.  The below table describes the source code found in this repository:</p>
+
+<ol>
+<li>Arduion_Panstamp_Source
+
+<ul>
+<li>simpleRPi_Rx.ino : The receiver source code</li>
+<li>simpleRPi_Tx.ino : The transmitter source code</li>
+</ul>
+</li>
+<li> python
+
+<ul>
+<li>listen_beaconRx.py : Script to read packets on the serial port and display the data on the terminal</li>
+</ul>
+</li>
+<li> LabVIEW
+
+<ul>
+<li>panStamp_beaconRx.lvproj : LabVIEW project file with VI's</li>
+</ul>
+</li>
+</ol>
+
+<h2>
+<a id="labview-gui" class="anchor" href="#labview-gui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LabVIEW GUI</h2>
+
+<p>The LabVIEW GUI includes several different interfaces, such as a text version of the received packet.  The GUI was minimized to hide all the various GUI modules.  The below two images is the minimized window, and the second is the full GUI with all the front panel components:</p>
+
+<hr>
+
+<p><br></p>
+
+<h6>
+<a id="labview-gui-minimized-window" class="anchor" href="#labview-gui-minimized-window" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LabVIEW GUI minimized window</h6>
+
+<p><br>
+<img src="http://odelayio.github.io/panStamp-IoT-Evaluation/images/1.jpg" alt="LV1"></p>
+
+<hr>
+
+<p><br></p>
+
+<h6>
+<a id="labview-gui-showing-all-front-pannel-components" class="anchor" href="#labview-gui-showing-all-front-pannel-components" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>LabVIEW GUI showing all front pannel components</h6>
+
+<p><br>
+<img src="http://odelayio.github.io/panStamp-IoT-Evaluation/images/2.jpg" alt="LV1"></p>
+
+<h2>
+<a id="results" class="anchor" href="#results" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Results</h2>
+
+<p>I was able to achieve a reliable wireless communication link at a distance around 200 meters.  The receiver module was located in my office and the transmitter was located in my backyard of my home.  I plan to use the CC430F5137 chipset for my home automation project.  I’m currently using the panstamp modules to prototype the design and plan to design a custom board with an integrated USB and an Ethernet port using the ENC28J60 device (serial to Ethernet device).</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Panstamp-iot-evaluation maintained by <a href="https://github.com/odelayIO">odelayIO</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
