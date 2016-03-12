@@ -1,4 +1,3 @@
-# 15 Port USB Power Supply using an ATX Power Supply
 # panStamp IoT Evaluation
 <br>
 <br>
@@ -49,7 +48,7 @@ The test was originally developed using Python to post-process the received pack
 
 
 
-# LabVIEW GUI
+## LabVIEW GUI
 The LabVIEW GUI includes several different interfaces, such as a text version of the received packet.  The GUI was minimized to hide all the various GUI modules.  The below two images is the minimized window, and the second is the full GUI with all the front panel components:
 
 ---
